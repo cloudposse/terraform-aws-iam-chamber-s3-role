@@ -2,7 +2,7 @@ module "label" {
   source     = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=0.1.3"
   attributes = "${var.attributes}"
   delimiter  = "${var.delimiter}"
-  name       = "${format("%s-%s", var.name, var.service_name)}"
+  name       = "${var.name}"
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   tags       = "${var.tags}"
@@ -33,13 +33,13 @@ data "aws_iam_policy_document" "assume_role" {
 data "aws_iam_policy_document" "default" {
   statement {
     actions   = ["${var.allowed_bucket_actions}"]
-    resources = ["${format("%s/%s/*", var.s3_bucket_arn, var.service_name)}"]
+    resources = ["${formatlist("%s/%s/*", var.s3_bucket_arn, var.service_name)}"]
     effect    = "Allow"
   }
 
   statement {
     actions   = ["s3:ListBucket", "s3:ListBucketVersions"]
-    resources = ["${format("%s/%s", var.s3_bucket_arn, var.service_name)}"]
+    resources = ["${formatlist("%s/%s", var.s3_bucket_arn, var.service_name)}"]
     effect    = "Allow"
   }
 
