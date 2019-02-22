@@ -62,8 +62,8 @@ variable "allowed_bucket_actions" {
 }
 
 variable "service_name" {
-  type        = "string"
-  description = "Name of chamber service"
+  type        = "list"
+  description = "Names of chamber services"
 }
 
 variable "max_session_duration" {
