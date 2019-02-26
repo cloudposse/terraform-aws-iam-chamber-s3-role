@@ -56,82 +56,26 @@ usage: |-
   and gives permission to the entities specified in `assume_role_arns` to assume the role.
 
   ```hcl
-  module "ssm_iam_role" {
-    source           = "git::https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role.git?ref=master"
+  module "service" {
+    source           = "git::https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role.git?ref=tags/0.1.0"
+    enabled          = "true"
     namespace        = "cp"
     stage            = "prod"
     name             = "app"
     attributes       = ["all"]
     region           = "us-west-2"
     account_id       = "XXXXXXXXXXX"
-    assume_role_arns = ["arn:aws:xxxxxxxxxx", "arn:aws:yyyyyyyyyyyy"]
+    assume_role_arns = "${local.kops_roles}"
     kms_key_arn      = "arn:aws:kms:us-west-2:123454095951:key/aced568e-3375-4ece-85e5-b35abc46c243"
-    ssm_parameters   = ["*"]
-    ssm_actions      = ["ssm:GetParametersByPath", "ssm:GetParameters"]
+    s3_bucket_arn    = "arn:aws:s3:::bucket_name"
+    services         = ["app", "builds", "staging", "default"]
+    read_only        = "false"
   }
   ```
 
 examples: |-
-  ### Example With Permission For Specific Resources
 
-  This example creates a role with the name `cp-prod-app-secrets` with permission to read the SSM parameters that begin with `secret-`, 
-  and gives permission to the entities specified in `assume_role_arns` to assume the role.
-
-  ```hcl
-  module "ssm_iam_role" {
-    source           = "git::https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role.git?ref=master"
-    namespace        = "cp"
-    stage            = "prod"
-    name             = "app"
-    attributes       = ["secrets"]
-    region           = "us-west-2"
-    account_id       = "XXXXXXXXXXX"
-    assume_role_arns = ["arn:aws:xxxxxxxxxx", "arn:aws:yyyyyyyyyyyy"]
-    kms_key_arn      = "arn:aws:kms:us-west-2:123454095951:key/aced568e-3375-4ece-85e5-b35abc46c243"
-    ssm_parameters   = ["secret-*"]
-    ssm_actions      = ["ssm:GetParameters"]
-  }
-  ```
-
-  ### Complete Example
-
-  This example:
-
-  * Provisions a KMS key to encrypt SSM Parameter Store secrets using [terraform-aws-kms-key](https://github.com/cloudposse/terraform-aws-kms-key) module
-  * Performs `Kops` cluster lookup to find the ARNs of `masters` and `nodes` by using [terraform-aws-kops-metadata](https://github.com/cloudposse/terraform-aws-kops-metadata) module
-  * Creates a role with the name `cp-prod-chamber-kops` with permission to read all SSM parameters from the path `kops`, 
-  and gives permission to the Kops `masters` and `nodes` to assume the role
-
-  ```hcl
-  module "kms_key" {
-    source      = "git::https://github.com/cloudposse/terraform-aws-kms-key.git?ref=master"
-    namespace   = "cp"
-    stage       = "prod"
-    name        = "chamber"
-    description = "KMS key for SSM"
-  }
-
-  module "kops_metadata" {
-    source       = "git::https://github.com/cloudposse/terraform-aws-kops-metadata.git?ref=master"
-    dns_zone     = "us-west-2.prod.cloudposse.co"
-    masters_name = "masters"
-    nodes_name   = "nodes"
-  }
-
-  module "ssm_iam_role" {
-    source           = "git::https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role.git?ref=master"
-    namespace        = "cp"
-    stage            = "prod"
-    name             = "chamber"
-    attributes       = ["kops"]
-    region           = "us-west-2"
-    account_id       = "XXXXXXXXXXX"
-    assume_role_arns = ["${module.kops_metadata.masters_role_arn}", "${module.kops_metadata.nodes_role_arn}"]
-    kms_key_arn      = "${module.kms_key.key_arn}"
-    ssm_parameters   = ["kops/*"]
-    ssm_actions      = ["ssm:GetParametersByPath", "ssm:GetParameters"]
-  }
-  ```
+  Check [terraform-root-modules](https://github.com/cloudposse/terraform-root-modules/tree/master/aws/chamber) for example.
 
 include:
   - "docs/targets.md"

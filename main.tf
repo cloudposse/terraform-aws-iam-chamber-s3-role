@@ -30,24 +30,23 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
+locals {
+  write_access_bucket_actions = ["s3:PutObject", "s3:PutObjectAcl", "s3:GetObject", "s3:DeleteObject", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetBucketLocation", "s3:AbortMultipartUpload"]
+  read_only_bucket_actions    = ["s3:GetObject", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetBucketLocation", "s3:AbortMultipartUpload"]
+}
+
 data "aws_iam_policy_document" "default" {
   statement {
-    actions   = ["${var.allowed_bucket_actions}"]
-    resources = ["${formatlist("%s/%s/*", var.s3_bucket_arn, var.service_name)}"]
+    actions   = ["${split(" ", var.read_only == "true" ? join(" ", local.read_only_bucket_actions) : join(" ", local.write_access_bucket_actions))}"]
+    resources = ["${formatlist("%s/%s/*", var.s3_bucket_arn, var.services)}"]
     effect    = "Allow"
   }
 
   statement {
     actions   = ["s3:ListBucket", "s3:ListBucketVersions"]
-    resources = ["${formatlist("%s/%s", var.s3_bucket_arn, var.service_name)}"]
+    resources = ["${var.s3_bucket_arn}"]
     effect    = "Allow"
   }
-
-//  statement {
-//    actions   = ["kms:Decrypt"]
-//    resources = ["${var.kms_key_arn}"]
-//    effect    = "Allow"
-//  }
 }
 
 resource "aws_iam_policy" "default" {

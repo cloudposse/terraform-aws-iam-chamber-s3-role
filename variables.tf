@@ -55,13 +55,7 @@ variable "assume_role_arns" {
   description = "List of ARNs to allow assuming the role. Could be AWS services or accounts, Kops nodes, IAM users or groups"
 }
 
-variable "allowed_bucket_actions" {
-  type        = "list"
-  default     = ["s3:PutObject", "s3:PutObjectAcl", "s3:GetObject", "s3:DeleteObject", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetBucketLocation", "s3:AbortMultipartUpload"]
-  description = "List of actions the user is permitted to perform on the S3 bucket"
-}
-
-variable "service_name" {
+variable "services" {
   type        = "list"
   description = "Names of chamber services"
 }
@@ -69,4 +63,16 @@ variable "service_name" {
 variable "max_session_duration" {
   default     = 3600
   description = "The maximum session duration (in seconds) for the role. Can have a value from 1 hour to 12 hours"
+}
+
+variable "read_only" {
+  type        = "string"
+  default     = "false"
+  description = "Set to `true` to deny write actions for bucket"
+}
+
+variable "enabled" {
+  type        = "string"
+  description = "Set to `false` to prevent the module from creating any resources"
+  default     = "true"
 }
