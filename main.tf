@@ -31,8 +31,24 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 locals {
-  write_access_bucket_actions = ["s3:PutObject", "s3:PutObjectAcl", "s3:GetObject", "s3:DeleteObject", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetBucketLocation", "s3:AbortMultipartUpload"]
-  read_only_bucket_actions    = ["s3:GetObject", "s3:ListBucket", "s3:ListBucketMultipartUploads", "s3:GetBucketLocation", "s3:AbortMultipartUpload"]
+  write_access_bucket_actions = [
+    "s3:PutObject", 
+    "s3:PutObjectAcl", 
+    "s3:GetObject", 
+    "s3:DeleteObject", 
+    "s3:ListBucket", 
+    "s3:ListBucketMultipartUploads", 
+    "s3:GetBucketLocation", 
+    "s3:AbortMultipartUpload"
+  ]
+  
+  read_only_bucket_actions    = [
+    "s3:GetObject", 
+    "s3:ListBucket", 
+    "s3:ListBucketMultipartUploads", 
+    "s3:GetBucketLocation", 
+    "s3:AbortMultipartUpload"
+  ]
 }
 
 data "aws_iam_policy_document" "default" {
