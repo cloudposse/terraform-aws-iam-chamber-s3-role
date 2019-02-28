@@ -13,11 +13,6 @@ variable "name" {
   description = "Name (e.g. `app` or `chamber`)"
 }
 
-variable "s3_bucket_arn" {
-  type        = "string"
-  description = "ARN of S3 bucket"
-}
-
 variable "delimiter" {
   type        = "string"
   default     = "-"
@@ -36,21 +31,12 @@ variable "tags" {
   description = "Additional tags (e.g. map(`BusinessUnit`,`XYZ`)"
 }
 
-variable "region" {
+variable "bucket_arn" {
   type        = "string"
-  description = "AWS Region"
+  description = "ARN of S3 bucket"
 }
 
-variable "account_id" {
-  type        = "string"
-  description = "AWS account ID"
-}
-
-variable "kms_key_arn" {
-  description = "ARN of the KMS key which will encrypt/decrypt SSM secret strings"
-}
-
-variable "assume_role_arns" {
+variable "principals_arns" {
   type        = "list"
   description = "List of ARNs to allow assuming the role. Could be AWS services or accounts, Kops nodes, IAM users or groups"
 }

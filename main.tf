@@ -6,6 +6,7 @@ module "label" {
   namespace  = "${var.namespace}"
   stage      = "${var.stage}"
   tags       = "${var.tags}"
+  enabled    = "${var.enabled}"
 }
 
 data "aws_iam_policy_document" "assume_role" {
@@ -25,53 +26,75 @@ data "aws_iam_policy_document" "assume_role" {
 
     principals {
       type        = "AWS"
-      identifiers = ["${var.assume_role_arns}"]
+      identifiers = ["${var.principals_arns}"]
     }
   }
 }
 
 locals {
-  write_access_bucket_actions = [
-    "s3:PutObject",
-    "s3:PutObjectAcl",
-    "s3:GetObject",
-    "s3:DeleteObject",
-    "s3:ListBucket",
-    "s3:ListBucketMultipartUploads",
-    "s3:GetBucketLocation",
-    "s3:AbortMultipartUpload",
-  ]
+  resources = ["${formatlist("%s/%s/*", var.bucket_arn, var.services)}"]
+}
 
-  read_only_bucket_actions = [
-    "s3:GetObject",
-    "s3:ListBucket",
-    "s3:ListBucketMultipartUploads",
-    "s3:GetBucketLocation",
-    "s3:AbortMultipartUpload",
-  ]
+data "aws_iam_policy_document" "resource_readonly_access" {
+  statement {
+    sid       = "ReadonlyAccess"
+    effect    = "Allow"
+    resources = ["${local.resources}"]
+
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:ListBucketMultipartUploads",
+      "s3:GetBucketLocation",
+      "s3:AbortMultipartUpload",
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "resource_full_access" {
+  statement {
+    sid       = "FullAccess"
+    effect    = "Allow"
+    resources = ["${local.resources}"]
+
+    actions = [
+      "s3:PutObject",
+      "s3:PutObjectAcl",
+      "s3:GetObject",
+      "s3:DeleteObject",
+      "s3:ListBucket",
+      "s3:ListBucketMultipartUploads",
+      "s3:GetBucketLocation",
+      "s3:AbortMultipartUpload",
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "default" {
-  statement {
-    actions   = ["${split(" ", var.read_only == "true" ? join(" ", local.read_only_bucket_actions) : join(" ", local.write_access_bucket_actions))}"]
-    resources = ["${formatlist("%s/%s/*", var.s3_bucket_arn, var.services)}"]
-    effect    = "Allow"
-  }
+  source_json = "${var.read_only == "true" ? data.aws_iam_policy_document.resource_readonly_access.json : data.aws_iam_policy_document.resource_full_access.json}"
 
   statement {
-    actions   = ["s3:ListBucket", "s3:ListBucketVersions"]
-    resources = ["${var.s3_bucket_arn}"]
+    sid = "BaseAccess"
+
+    actions = [
+      "s3:ListBucket",
+      "s3:ListBucketVersions",
+    ]
+
+    resources = ["${var.bucket_arn}"]
     effect    = "Allow"
   }
 }
 
 resource "aws_iam_policy" "default" {
+  count       = "${var.enabled == "true" ? 1 : 0}"
   name        = "${module.label.id}"
   description = "Allow S3 actions"
   policy      = "${data.aws_iam_policy_document.default.json}"
 }
 
 resource "aws_iam_role" "default" {
+  count                = "${var.enabled == "true" ? 1 : 0}"
   name                 = "${module.label.id}"
   assume_role_policy   = "${data.aws_iam_policy_document.assume_role.json}"
   description          = "IAM Role with permissions to perform actions on S3 resources"
@@ -79,6 +102,7 @@ resource "aws_iam_role" "default" {
 }
 
 resource "aws_iam_role_policy_attachment" "default" {
+  count      = "${var.enabled == "true" ? 1 : 0}"
   role       = "${aws_iam_role.default.name}"
   policy_arn = "${aws_iam_policy.default.arn}"
 }

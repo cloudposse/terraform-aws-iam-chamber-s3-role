@@ -6,7 +6,7 @@
 # terraform-aws-chamber-s3-iam-role [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-chamber-s3-iam-role.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-chamber-s3-iam-role) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-chamber-s3-iam-role.svg)](https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
-Terraform module to provision an IAM role with configurable permissions to access [SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html).
+Terraform module to provision an IAM role with configurable permissions to access [S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html) used by Chamber as [Parameter Store backend](https://github.com/segmentio/chamber#s3-backend-experimental).
 
 
 ---
@@ -41,15 +41,13 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 
 ## Introduction
 
-For more information on how to control access to Systems Manager parameters by using AWS Identity and Access Management, see [Controlling Access to Systems Manager Parameters](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html).
+Because Chamber abstracts parameter store managments, read how to use parameter hierarchies to help organize and manage parameters, see [Organizing Parameters into Hierarchies](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-organize.html).
 
-For more information on how to use parameter hierarchies to help organize and manage parameters, see [Organizing Parameters into Hierarchies](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-organize.html).
-
-__NOTE:__ This module can be used to provision IAM roles with SSM permissions for [chamber](https://docs.cloudposse.com/tools/chamber/).  
+__NOTE:__ This module can be used to provision IAM roles with S3 permissions for [chamber](https://docs.cloudposse.com/tools/chamber/).
 
 ## Usage
 
-This example creates a role with the name `cp-prod-app-all` with permission to read all SSM parameters, 
+This example creates a role with the name `cp-prod-app-all` with permission to use S3 bucket as parameter store,
 and gives permission to the entities specified in `assume_role_arns` to assume the role.
 
 ```hcl
@@ -59,13 +57,9 @@ module "service" {
   namespace        = "cp"
   stage            = "prod"
   name             = "app"
-  attributes       = ["all"]
-  region           = "us-west-2"
-  account_id       = "XXXXXXXXXXX"
-  assume_role_arns = "${local.kops_roles}"
-  kms_key_arn      = "arn:aws:kms:us-west-2:123454095951:key/aced568e-3375-4ece-85e5-b35abc46c243"
-  s3_bucket_arn    = "arn:aws:s3:::bucket_name"
-  services         = ["app", "builds", "staging", "default"]
+  principals_arns  = "${local.kops_roles}"
+  bucket_arn       = "arn:aws:s3:::bucket_name"
+  services         = ["app", "staging", "default"]
   read_only        = "false"
 }
 ```
@@ -76,7 +70,8 @@ module "service" {
 ## Examples
 
 
-Check [terraform-root-modules](https://github.com/cloudposse/terraform-root-modules/tree/master/aws/chamber) for example.
+### Additional Examples
+The [`example`](./example) directory contains complete working examples with variations of how to use the module.
 
 
 
@@ -94,18 +89,15 @@ Available targets:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| account_id | AWS account ID | string | - | yes |
-| assume_role_arns | List of ARNs to allow assuming the role. Could be AWS services or accounts, Kops nodes, IAM users or groups | list | - | yes |
 | attributes | Additional attributes (e.g. `1`) | list | `<list>` | no |
+| bucket_arn | ARN of S3 bucket | string | - | yes |
 | delimiter | Delimiter to be used between `namespace`, `stage`, `name` and `attributes` | string | `-` | no |
 | enabled | Set to `false` to prevent the module from creating any resources | string | `true` | no |
-| kms_key_arn | ARN of the KMS key which will encrypt/decrypt SSM secret strings | string | - | yes |
 | max_session_duration | The maximum session duration (in seconds) for the role. Can have a value from 1 hour to 12 hours | string | `3600` | no |
 | name | Name (e.g. `app` or `chamber`) | string | - | yes |
 | namespace | Namespace (e.g. `cp` or `cloudposse`) | string | - | yes |
+| principals_arns | List of ARNs to allow assuming the role. Could be AWS services or accounts, Kops nodes, IAM users or groups | list | - | yes |
 | read_only | Set to `true` to deny write actions for bucket | string | `false` | no |
-| region | AWS Region | string | - | yes |
-| s3_bucket_arn | ARN of S3 bucket | string | - | yes |
 | services | Names of chamber services | list | - | yes |
 | stage | Stage (e.g. `prod`, `dev`, `staging`) | string | - | yes |
 | tags | Additional tags (e.g. map(`BusinessUnit`,`XYZ`) | map | `<map>` | no |
@@ -255,11 +247,15 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
 
 ### Contributors
 
-|  [![Andriy Knysh][aknysh_avatar]][aknysh_homepage]<br/>[Andriy Knysh][aknysh_homepage] |
-|---|
+|  [![Andriy Knysh][aknysh_avatar]][aknysh_homepage]<br/>[Andriy Knysh][aknysh_homepage] | [![Maxim Mironenko][maximmi_avatar]][maximmi_homepage]<br/>[Maxim Mironenko][maximmi_homepage] | [![Igor Rodionov][goruha_avatar]][goruha_homepage]<br/>[Igor Rodionov][goruha_homepage] |
+|---|---|---|
 
   [aknysh_homepage]: https://github.com/aknysh
   [aknysh_avatar]: https://github.com/aknysh.png?size=150
+  [maximmi_homepage]: https://github.com/maximmi
+  [maximmi_avatar]: https://github.com/maximmi.png?size=150
+  [goruha_homepage]: https://github.com/goruha
+  [goruha_avatar]: https://github.com/goruha.png?size=150
 
 
 
