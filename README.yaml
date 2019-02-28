@@ -45,7 +45,7 @@ description: |-
 
 # How to use this project
 usage: |-
-  This example creates a role with the name `cp-prod-app-all` with permission to use S3 bucket as parameter store,
+  This example creates a role with the name `cp-prod-app` with permission to use Chamber with S3 bucket as parameter store,
   and gives permission to the entities specified in `assume_role_arns` to assume the role.
 
   ```hcl
