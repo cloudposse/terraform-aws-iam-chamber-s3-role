@@ -1,6 +1,6 @@
 output "role_name" {
   value       = "${join("", aws_iam_role.default.*.name)}"
-  description = "The name of the crated role"
+  description = "The name of the IAM role created"
 }
 
 output "role_id" {
