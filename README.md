@@ -52,7 +52,7 @@ module "service" {
   namespace        = "cp"
   stage            = "prod"
   name             = "app"
-  principals_arns  = "${local.kops_roles}"
+  principals_arns  = ["${local.kops_roles}"]
   bucket_arn       = "arn:aws:s3:::bucket_name"
   services         = ["app", "staging", "default"]
   read_only        = "false"
