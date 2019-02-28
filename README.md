@@ -3,7 +3,7 @@
 
 [![Cloud Posse][logo]](https://cpco.io/homepage)
 
-# terraform-aws-chamber-s3-iam-role [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-chamber-s3-iam-role.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-chamber-s3-iam-role) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-chamber-s3-iam-role.svg)](https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+# terraform-aws-iam-chamber-s3-role [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-iam-chamber-s3-role.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-iam-chamber-s3-role) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-chamber-s3-role.svg)](https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
 Terraform module to provision an IAM role with configurable permissions to access [S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html) used by Chamber as [Parameter Store backend](https://github.com/segmentio/chamber#s3-backend-experimental).
@@ -47,7 +47,7 @@ and gives permission to the entities specified in `assume_role_arns` to assume t
 
 ```hcl
 module "service" {
-  source           = "git::https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role.git?ref=tags/0.1.0"
+  source           = "git::https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role.git?ref=tags/0.1.0"
   enabled          = "true"
   namespace        = "cp"
   stage            = "prod"
@@ -97,7 +97,7 @@ The [`example`](./example) directory contains complete working examples with var
 
 ## Share the Love 
 
-Like this project? Please give it a ★ on [our GitHub](https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role)! (it helps us **a lot**) 
+Like this project? Please give it a ★ on [our GitHub](https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role)! (it helps us **a lot**) 
 
 Are you using this project or any of our other projects? Consider [leaving a testimonial][testimonial]. =)
 
@@ -116,7 +116,7 @@ Check out these related projects.
 
 **Got a question?**
 
-File a GitHub [issue](https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role/issues), send us an [email][email] or join our [Slack Community][slack].
+File a GitHub [issue](https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role/issues), send us an [email][email] or join our [Slack Community][slack].
 
 [![README Commercial Support][readme_commercial_support_img]][readme_commercial_support_link]
 
@@ -155,7 +155,7 @@ Signup for [our newsletter][newsletter] that covers everything on our technology
 
 ### Bug Reports & Feature Requests
 
-Please use the [issue tracker](https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role/issues) to report any bugs or file feature requests.
+Please use the [issue tracker](https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role/issues) to report any bugs or file feature requests.
 
 ### Developing
 
@@ -260,16 +260,16 @@ Check out [our other projects][github], [follow us on twitter][twitter], [apply 
   [we_love_open_source]: https://cpco.io/we-love-open-source
   [module_development]: https://cpco.io/module-development
   [terraform_modules]: https://cpco.io/terraform-modules
-  [readme_header_img]: https://cloudposse.com/readme/header/img?repo=cloudposse/terraform-aws-chamber-s3-iam-role
-  [readme_header_link]: https://cloudposse.com/readme/header/link?repo=cloudposse/terraform-aws-chamber-s3-iam-role
-  [readme_footer_img]: https://cloudposse.com/readme/footer/img?repo=cloudposse/terraform-aws-chamber-s3-iam-role
-  [readme_footer_link]: https://cloudposse.com/readme/footer/link?repo=cloudposse/terraform-aws-chamber-s3-iam-role
-  [readme_commercial_support_img]: https://cloudposse.com/readme/commercial-support/img?repo=cloudposse/terraform-aws-chamber-s3-iam-role
-  [readme_commercial_support_link]: https://cloudposse.com/readme/commercial-support/link?repo=cloudposse/terraform-aws-chamber-s3-iam-role
-  [share_twitter]: https://twitter.com/intent/tweet/?text=terraform-aws-chamber-s3-iam-role&url=https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role
-  [share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=terraform-aws-chamber-s3-iam-role&url=https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role
-  [share_reddit]: https://reddit.com/submit/?url=https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role
-  [share_facebook]: https://facebook.com/sharer/sharer.php?u=https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role
-  [share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role
-  [share_email]: mailto:?subject=terraform-aws-chamber-s3-iam-role&body=https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role
-  [beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/terraform-aws-chamber-s3-iam-role?pixel&cs=github&cm=readme&an=terraform-aws-chamber-s3-iam-role
+  [readme_header_img]: https://cloudposse.com/readme/header/img?repo=cloudposse/terraform-aws-iam-chamber-s3-role
+  [readme_header_link]: https://cloudposse.com/readme/header/link?repo=cloudposse/terraform-aws-iam-chamber-s3-role
+  [readme_footer_img]: https://cloudposse.com/readme/footer/img?repo=cloudposse/terraform-aws-iam-chamber-s3-role
+  [readme_footer_link]: https://cloudposse.com/readme/footer/link?repo=cloudposse/terraform-aws-iam-chamber-s3-role
+  [readme_commercial_support_img]: https://cloudposse.com/readme/commercial-support/img?repo=cloudposse/terraform-aws-iam-chamber-s3-role
+  [readme_commercial_support_link]: https://cloudposse.com/readme/commercial-support/link?repo=cloudposse/terraform-aws-iam-chamber-s3-role
+  [share_twitter]: https://twitter.com/intent/tweet/?text=terraform-aws-iam-chamber-s3-role&url=https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role
+  [share_linkedin]: https://www.linkedin.com/shareArticle?mini=true&title=terraform-aws-iam-chamber-s3-role&url=https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role
+  [share_reddit]: https://reddit.com/submit/?url=https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role
+  [share_facebook]: https://facebook.com/sharer/sharer.php?u=https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role
+  [share_googleplus]: https://plus.google.com/share?url=https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role
+  [share_email]: mailto:?subject=terraform-aws-iam-chamber-s3-role&body=https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role
+  [beacon]: https://ga-beacon.cloudposse.com/UA-76589703-4/cloudposse/terraform-aws-iam-chamber-s3-role?pixel&cs=github&cm=readme&an=terraform-aws-iam-chamber-s3-role

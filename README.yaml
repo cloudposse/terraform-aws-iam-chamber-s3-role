@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name: terraform-aws-chamber-s3-iam-role
+name: terraform-aws-iam-chamber-s3-role
 
 # Logo for this project
 #logo: docs/logo.png
@@ -14,16 +14,16 @@ name: terraform-aws-chamber-s3-iam-role
 license: "APACHE2"
 
 # Canonical GitHub repo
-github_repo: cloudposse/terraform-aws-chamber-s3-iam-role
+github_repo: cloudposse/terraform-aws-iam-chamber-s3-role
 
 # Badges to display
 badges:
   - name: "Build Status"
-    image: "https://travis-ci.org/cloudposse/terraform-aws-chamber-s3-iam-role.svg?branch=master"
-    url: "https://travis-ci.org/cloudposse/terraform-aws-chamber-s3-iam-role"
+    image: "https://travis-ci.org/cloudposse/terraform-aws-iam-chamber-s3-role.svg?branch=master"
+    url: "https://travis-ci.org/cloudposse/terraform-aws-iam-chamber-s3-role"
   - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-chamber-s3-iam-role.svg"
-    url: "https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role/releases/latest"
+    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-iam-chamber-s3-role.svg"
+    url: "https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role/releases/latest"
   - name: "Slack Community"
     image: "https://slack.cloudposse.com/badge.svg"
     url: "https://slack.cloudposse.com"
@@ -50,7 +50,7 @@ usage: |-
 
   ```hcl
   module "service" {
-    source           = "git::https://github.com/cloudposse/terraform-aws-chamber-s3-iam-role.git?ref=tags/0.1.0"
+    source           = "git::https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role.git?ref=tags/0.1.0"
     enabled          = "true"
     namespace        = "cp"
     stage            = "prod"
