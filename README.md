@@ -39,11 +39,6 @@ We literally have [*hundreds of terraform modules*][terraform_modules] that are 
 
 
 
-## Introduction
-
-Because Chamber abstracts parameter store managments, read how to use parameter hierarchies to help organize and manage parameters, see [Organizing Parameters into Hierarchies](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-organize.html).
-
-__NOTE:__ This module can be used to provision IAM roles with S3 permissions for [chamber](https://docs.cloudposse.com/tools/chamber/).
 
 ## Usage
 

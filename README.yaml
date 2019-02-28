@@ -43,11 +43,6 @@ related:
 description: |-
   Terraform module to provision an IAM role with configurable permissions to access [S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html) used by Chamber as [Parameter Store backend](https://github.com/segmentio/chamber#s3-backend-experimental).
 
-introduction: |-
-  Because Chamber abstracts parameter store managments, read how to use parameter hierarchies to help organize and manage parameters, see [Organizing Parameters into Hierarchies](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-organize.html).
-
-  __NOTE:__ This module can be used to provision IAM roles with S3 permissions for [chamber](https://docs.cloudposse.com/tools/chamber/).
-
 # How to use this project
 usage: |-
   This example creates a role with the name `cp-prod-app-all` with permission to use S3 bucket as parameter store,
@@ -69,7 +64,7 @@ usage: |-
 
   ### Additional Examples
   The [`example`](./example) directory contains complete working examples with variations of how to use the module.
-  
+
 include:
   - "docs/terraform.md"
 
