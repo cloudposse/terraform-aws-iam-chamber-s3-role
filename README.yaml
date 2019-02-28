@@ -67,13 +67,10 @@ usage: |-
   }
   ```
 
-examples: |-
-
   ### Additional Examples
   The [`example`](./example) directory contains complete working examples with variations of how to use the module.
-
+  
 include:
-  - "docs/targets.md"
   - "docs/terraform.md"
 
 # Contributors to this project

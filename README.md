@@ -64,27 +64,14 @@ module "service" {
 }
 ```
 
-
-
-
-## Examples
-
-
 ### Additional Examples
 The [`example`](./example) directory contains complete working examples with variations of how to use the module.
 
 
 
-## Makefile Targets
-```
-Available targets:
 
-  help                                Help screen
-  help/all                            Display help for all targets
-  help/short                          This help short screen
-  lint                                Lint terraform code
 
-```
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
