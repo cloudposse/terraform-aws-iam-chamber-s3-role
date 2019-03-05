@@ -47,7 +47,7 @@ and gives permission to the entities specified in `assume_role_arns` to assume t
 
 ```hcl
 module "service" {
-  source           = "git::https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role.git?ref=tags/0.1.0"
+  source           = "git::https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role.git?ref=master"
   enabled          = "true"
   namespace        = "cp"
   stage            = "prod"
