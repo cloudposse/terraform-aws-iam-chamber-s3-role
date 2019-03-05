@@ -89,10 +89,10 @@ The [`example`](./example) directory contains complete working examples with var
 
 | Name | Description |
 |------|-------------|
-| policy_document | IAM policy to access chamber s3 |
 | role_arn | The Amazon Resource Name (ARN) specifying the role |
 | role_id | The stable and unique string identifying the role |
 | role_name | The name of the IAM role created |
+| role_policy_document | IAM policy to access chamber s3 |
 
 
 
