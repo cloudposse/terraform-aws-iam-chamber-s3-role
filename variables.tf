@@ -62,3 +62,10 @@ variable "enabled" {
   description = "Set to `false` to prevent the module from creating any resources"
   default     = "true"
 }
+
+variable "role_enabled" {
+  type        = "string"
+  description = "Set to `false` to prevent the module from creating IAM role"
+  default     = "true"
+}
+
