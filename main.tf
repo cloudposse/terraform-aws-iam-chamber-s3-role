@@ -63,7 +63,7 @@ data "aws_iam_policy_document" "base" {
 }
 
 module "role" {
-  source     = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=init"
+  source = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=init"
 
   enabled    = "${var.enabled == "true" && var.role_enabled == "true" ? "true" : "false"}"
   name       = "${var.name}"

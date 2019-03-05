@@ -68,4 +68,3 @@ variable "role_enabled" {
   description = "Set to `false` to prevent the module from creating IAM role"
   default     = "true"
 }
-

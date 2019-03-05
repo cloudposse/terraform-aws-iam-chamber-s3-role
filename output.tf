@@ -14,6 +14,6 @@ output "role_arn" {
 }
 
 output "role_policy_document" {
-  value = "${module.role.policy}"
+  value       = "${module.role.policy}"
   description = "IAM policy to access chamber s3"
 }
