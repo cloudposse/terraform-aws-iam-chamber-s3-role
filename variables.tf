@@ -38,11 +38,13 @@ variable "bucket_arn" {
 
 variable "principals_arns" {
   type        = "list"
+  default     = []
   description = "List of ARNs to allow assuming the role. Could be AWS services or accounts, Kops nodes, IAM users or groups"
 }
 
 variable "services" {
   type        = "list"
+  default     = []
   description = "Names of chamber services"
 }
 
