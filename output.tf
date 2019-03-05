@@ -13,7 +13,7 @@ output "role_arn" {
   description = "The Amazon Resource Name (ARN) specifying the role"
 }
 
-output "policy_document" {
-  value = "${module.aggregated_policy.result_document}"
+output "role_policy_document" {
+  value = "${module.role.policy}"
   description = "IAM policy to access chamber s3"
 }

@@ -62,16 +62,8 @@ data "aws_iam_policy_document" "base" {
   }
 }
 
-module "aggregated_policy" {
-  source           = "git::https://github.com/cloudposse/terraform-aws-iam-policy-document-aggregator.git?ref=tags/0.1.0"
-  source_documents = [
-    "${var.read_only == "true" ? data.aws_iam_policy_document.resource_readonly_access.json : data.aws_iam_policy_document.resource_full_access.json}",
-    "${data.aws_iam_policy_document.base.json}",
-  ]
-}
-
 module "role" {
-  source     = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=0.1.0"
+  source     = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=init"
 
   enabled    = "${var.enabled == "true" && var.role_enabled == "true" ? "true" : "false"}"
   name       = "${var.name}"
@@ -83,7 +75,10 @@ module "role" {
 
   principals_arns = ["${var.principals_arns}"]
 
-  policy_documents = ["${module.aggregated_policy.result_document}"]
+  policy_documents = [
+    "${var.read_only == "true" ? data.aws_iam_policy_document.resource_readonly_access.json : data.aws_iam_policy_document.resource_full_access.json}",
+    "${data.aws_iam_policy_document.base.json}",
+  ]
 
   max_session_duration = "${var.max_session_duration}"
 }
