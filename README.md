@@ -3,7 +3,7 @@
 
 [![Cloud Posse][logo]](https://cpco.io/homepage)
 
-# terraform-aws-iam-chamber-s3-role [![Build Status](https://travis-ci.org/cloudposse/terraform-aws-iam-chamber-s3-role.svg?branch=master)](https://travis-ci.org/cloudposse/terraform-aws-iam-chamber-s3-role) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-chamber-s3-role.svg)](https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
+# terraform-aws-iam-chamber-s3-role [![Build Status](https://g.codefresh.io/api/badges/pipeline/cloudposse/cloudposse%2Fterraform-aws-iam-chamber-s3-role%2Flint?type=cf-1)](https://g.codefresh.io/public/accounts/cloudposse/pipelines/cloudposse/terraform-aws-iam-chamber-s3-role/lint) [![Latest Release](https://img.shields.io/github/release/cloudposse/terraform-aws-iam-chamber-s3-role.svg)](https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role/releases/latest) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
 Terraform module to provision an IAM role with configurable permissions to access [S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/Welcome.html) used by Chamber as [Parameter Store backend](https://github.com/segmentio/chamber#s3-backend-experimental).
