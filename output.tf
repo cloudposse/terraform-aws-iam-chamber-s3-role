@@ -1,14 +1,19 @@
 output "role_name" {
-  value       = "${join("", aws_iam_role.default.*.name)}"
+  value       = "${module.role.name}"
   description = "The name of the IAM role created"
 }
 
 output "role_id" {
-  value       = "${join("", aws_iam_role.default.*.unique_id)}"
+  value       = "${module.role.id}"
   description = "The stable and unique string identifying the role"
 }
 
 output "role_arn" {
-  value       = "${join("", aws_iam_role.default.*.arn)}"
+  value       = "${module.role.arn}"
   description = "The Amazon Resource Name (ARN) specifying the role"
+}
+
+output "role_policy_document" {
+  value       = "${module.role.policy}"
+  description = "IAM policy to access chamber s3"
 }

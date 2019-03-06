@@ -9,28 +9,6 @@ module "label" {
   enabled    = "${var.enabled}"
 }
 
-data "aws_iam_policy_document" "assume_role" {
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["ec2.amazonaws.com"]
-    }
-  }
-
-  statement {
-    effect  = "Allow"
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "AWS"
-      identifiers = ["${var.principals_arns}"]
-    }
-  }
-}
-
 locals {
   resources = ["${formatlist("%s/%s/*", var.bucket_arn, var.services)}"]
 }
@@ -70,9 +48,7 @@ data "aws_iam_policy_document" "resource_full_access" {
   }
 }
 
-data "aws_iam_policy_document" "default" {
-  source_json = "${var.read_only == "true" ? data.aws_iam_policy_document.resource_readonly_access.json : data.aws_iam_policy_document.resource_full_access.json}"
-
+data "aws_iam_policy_document" "base" {
   statement {
     sid = "BaseAccess"
 
@@ -86,23 +62,23 @@ data "aws_iam_policy_document" "default" {
   }
 }
 
-resource "aws_iam_policy" "default" {
-  count       = "${var.enabled == "true" ? 1 : 0}"
-  name        = "${module.label.id}"
-  description = "Allow S3 actions"
-  policy      = "${data.aws_iam_policy_document.default.json}"
-}
+module "role" {
+  source = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=tags/0.1.0"
 
-resource "aws_iam_role" "default" {
-  count                = "${var.enabled == "true" ? 1 : 0}"
-  name                 = "${module.label.id}"
-  assume_role_policy   = "${data.aws_iam_policy_document.assume_role.json}"
-  description          = "IAM Role with permissions to perform actions on S3 resources"
+  enabled    = "${var.enabled == "true" && var.role_enabled == "true" ? "true" : "false"}"
+  name       = "${var.name}"
+  namespace  = "${var.namespace}"
+  stage      = "${var.stage}"
+  attributes = "${var.attributes}"
+  delimiter  = "${var.delimiter}"
+  tags       = "${var.tags}"
+
+  principals_arns = ["${var.principals_arns}"]
+
+  policy_documents = [
+    "${var.read_only == "true" ? data.aws_iam_policy_document.resource_readonly_access.json : data.aws_iam_policy_document.resource_full_access.json}",
+    "${data.aws_iam_policy_document.base.json}",
+  ]
+
   max_session_duration = "${var.max_session_duration}"
-}
-
-resource "aws_iam_role_policy_attachment" "default" {
-  count      = "${var.enabled == "true" ? 1 : 0}"
-  role       = "${aws_iam_role.default.name}"
-  policy_arn = "${aws_iam_policy.default.arn}"
 }

@@ -38,11 +38,13 @@ variable "bucket_arn" {
 
 variable "principals_arns" {
   type        = "list"
+  default     = []
   description = "List of ARNs to allow assuming the role. Could be AWS services or accounts, Kops nodes, IAM users or groups"
 }
 
 variable "services" {
   type        = "list"
+  default     = []
   description = "Names of chamber services"
 }
 
@@ -60,5 +62,11 @@ variable "read_only" {
 variable "enabled" {
   type        = "string"
   description = "Set to `false` to prevent the module from creating any resources"
+  default     = "true"
+}
+
+variable "role_enabled" {
+  type        = "string"
+  description = "Set to `false` to prevent the module from creating IAM role"
   default     = "true"
 }
