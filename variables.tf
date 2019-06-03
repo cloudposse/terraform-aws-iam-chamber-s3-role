@@ -70,3 +70,15 @@ variable "role_enabled" {
   description = "Set to `false` to prevent the module from creating IAM role"
   default     = "true"
 }
+
+variable "role_description" {
+  type        = "string"
+  description = "The description of the IAM role that is visible in the IAM role manager"
+  default     = "Role to access to S3 bucket"
+}
+
+variable "policy_description" {
+  type        = "string"
+  description = "The description of the IAM policy that is visible in the IAM policy manager"
+  default     = "Access to S3 bucket"
+}

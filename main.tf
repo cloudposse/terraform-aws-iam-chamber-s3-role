@@ -1,14 +1,3 @@
-module "label" {
-  source     = "git::https://github.com/cloudposse/terraform-terraform-label.git?ref=0.1.3"
-  attributes = "${var.attributes}"
-  delimiter  = "${var.delimiter}"
-  name       = "${var.name}"
-  namespace  = "${var.namespace}"
-  stage      = "${var.stage}"
-  tags       = "${var.tags}"
-  enabled    = "${var.enabled}"
-}
-
 locals {
   resources = ["${formatlist("%s/%s/*", var.bucket_arn, var.services)}"]
 }
@@ -63,7 +52,7 @@ data "aws_iam_policy_document" "base" {
 }
 
 module "role" {
-  source = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=tags/0.1.0"
+  source = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=tags/0.2.1"
 
   enabled    = "${var.enabled == "true" && var.role_enabled == "true" ? "true" : "false"}"
   name       = "${var.name}"
@@ -81,4 +70,6 @@ module "role" {
   ]
 
   max_session_duration = "${var.max_session_duration}"
+  role_description     = "${var.role_description}"
+  policy_description   = "${var.policy_description}"
 }
