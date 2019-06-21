@@ -4,8 +4,8 @@ locals {
 
 data "aws_iam_policy_document" "resource_readonly_access" {
   statement {
-    sid    = "ReadonlyAccess"
-    effect = "Allow"
+    sid       = "ReadonlyAccess"
+    effect    = "Allow"
     resources = local.resources
 
     actions = [
@@ -20,8 +20,8 @@ data "aws_iam_policy_document" "resource_readonly_access" {
 
 data "aws_iam_policy_document" "resource_full_access" {
   statement {
-    sid    = "FullAccess"
-    effect = "Allow"
+    sid       = "FullAccess"
+    effect    = "Allow"
     resources = local.resources
 
     actions = [
@@ -62,7 +62,7 @@ module "role" {
   delimiter  = var.delimiter
   tags       = var.tags
 
-  principals_arns = [var.principals_arns]
+  principals_arns = var.principals_arns
 
   policy_documents = [
     var.read_only == "true" ? data.aws_iam_policy_document.resource_readonly_access.json : data.aws_iam_policy_document.resource_full_access.json,
