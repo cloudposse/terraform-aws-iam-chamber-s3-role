@@ -29,7 +29,7 @@ module "bucket" {
   versioning_enabled = "false"
   user_enabled       = "false"
 
-  sse_algorithm     = "aws:kms"
+  sse_algorithm      = "aws:kms"
   kms_master_key_arn = "${module.kms_key.key_arn}"
 }
 
