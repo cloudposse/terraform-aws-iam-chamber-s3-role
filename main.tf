@@ -58,8 +58,11 @@ data "aws_iam_policy_document" "base" {
 module "role" {
   source = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=tags/0.6.0"
 
-  enabled         = module.this.enabled && var.role_enabled ? true : false
-  principals_arns = var.principals_arns
+  enabled = module.this.enabled && var.role_enabled ? true : false
+
+  principals = {
+    "AWS" : var.principals_arns
+  }
 
   policy_documents = [
     var.read_only ? data.aws_iam_policy_document.resource_readonly_access.json : data.aws_iam_policy_document.resource_full_access.json,
