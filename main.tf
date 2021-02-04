@@ -56,7 +56,8 @@ data "aws_iam_policy_document" "base" {
 }
 
 module "role" {
-  source = "git::https://github.com/cloudposse/terraform-aws-iam-role.git?ref=tags/0.6.0"
+  source  = "cloudposse/iam-role/aws"
+  version = "0.6.0"
 
   enabled = module.this.enabled && var.role_enabled ? true : false
 

@@ -47,7 +47,9 @@ usage: |-
 
   ```hcl
   module "chamber_s3_role" {
-    source           = "git::https://github.com/cloudposse/terraform-aws-iam-chamber-s3-role.git?ref=master"
+    source = "cloudposse/iam-chamber-s3-role/aws"
+    # Cloud Posse recommends pinning every module to a specific version
+    # version     = "x.x.x"
     enabled          = true
     namespace        = "eg"
     stage            = "prod"
