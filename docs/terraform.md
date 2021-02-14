@@ -13,6 +13,19 @@
 |------|---------|
 | aws | >= 2.0 |
 
+## Modules
+
+| Name | Source | Version |
+|------|--------|---------|
+| role | cloudposse/iam-role/aws | 0.9.2 |
+| this | cloudposse/label/null | 0.24.1 |
+
+## Resources
+
+| Name |
+|------|
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.0/docs/data-sources/iam_policy_document) |
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
@@ -49,5 +62,4 @@
 | role\_id | The stable and unique string identifying the role |
 | role\_name | The name of the IAM role created |
 | role\_policy\_document | IAM policy to access chamber S3 |
-
 <!-- markdownlint-restore -->
