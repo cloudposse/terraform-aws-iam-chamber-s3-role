@@ -150,7 +150,7 @@ For automated tests of the complete example using [bats](https://github.com/bats
 
 | Name |
 |------|
-| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/2.0/docs/data-sources/iam_policy_document) |
+| [aws_iam_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) |
 
 ## Inputs
 
