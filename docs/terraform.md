@@ -17,7 +17,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| role | cloudposse/iam-role/aws | 0.9.2 |
+| role | cloudposse/iam-role/aws | 0.9.3 |
 | this | cloudposse/label/null | 0.24.1 |
 
 ## Resources
