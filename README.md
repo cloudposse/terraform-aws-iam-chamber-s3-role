@@ -142,7 +142,7 @@ For automated tests of the complete example using [bats](https://github.com/bats
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_role"></a> [role](#module\_role) | cloudposse/iam-role/aws | 0.13.0 |
+| <a name="module_role"></a> [role](#module\_role) | cloudposse/iam-role/aws | 0.14.0 |
 | <a name="module_this"></a> [this](#module\_this) | cloudposse/label/null | 0.25.0 |
 
 ## Resources
