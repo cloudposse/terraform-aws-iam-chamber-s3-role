@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "base" {
 
 module "role" {
   source  = "cloudposse/iam-role/aws"
-  version = "0.13.0"
+  version = "0.19.0"
 
   enabled = module.this.enabled && var.role_enabled ? true : false
 
