@@ -5,3 +5,4 @@ repository:
   description: Terraform module to provision an IAM role with configurable permissions to access S3 as chamber backend
   homepage: https://cloudposse.com/accelerate
   topics: ""
+
